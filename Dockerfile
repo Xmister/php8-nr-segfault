@@ -14,6 +14,7 @@ RUN tar --strip-components=1 -xzf /root/drupal-7.91.tar.gz
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN composer require drush/drush:8.*
 RUN mv /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
+# License key is from a throwaway free account
 RUN echo 'newrelic.license = "4bb2e8ff486a4a2bca5f18137c479f0741eeNRAL"' >> /usr/local/etc/php/php.ini 
 RUN cp -a sites/default/default.settings.php sites/default/settings.php
 COPY test.php /var/www/html/test.php
