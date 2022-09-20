@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_DATABASE: 'drupal'
+      MYSQL_USER: 'drupal'
+      MYSQL_PASSWORD: 'drupal'
+    restart: always
+  drupal:
+    build: .
+    ports:
+      - 80:80
+    restart: always
+    depends_on:
+      - mysql
+    command: [ "bash", "-c", "yes | vendor/bin/drush si --db-url=mysql://drupal:drupal@mysql/drupal ; exec apache2-foreground" ]
