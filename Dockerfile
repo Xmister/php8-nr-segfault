@@ -1,10 +1,10 @@
-FROM php:8.0-apache-bullseye
+FROM php:8.1-apache
 WORKDIR /root
 RUN apt-get update && apt-get -fy install wget git zlib1g-dev libpng-dev mariadb-client gnupg unzip
 RUN echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' > /etc/apt/sources.list.d/newrelic.list
 RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
 RUN apt-get update && apt-get -fy install newrelic-php5
-RUN ln -s /usr/lib/newrelic-php5/agent/x64/newrelic-20200930.so /usr/local/lib/php/extensions/no-debug-non-zts-20200930/newrelic.so
+RUN ln -s /usr/lib/newrelic-php5/agent/x64/newrelic-20210902.so /usr/local/lib/php/extensions/no-debug-non-zts-20210902/newrelic.so
 RUN docker-php-ext-configure pdo_mysql && \
     docker-php-ext-install pdo_mysql gd && \
     docker-php-ext-enable newrelic
@@ -20,3 +20,4 @@ RUN cp -a sites/default/default.settings.php sites/default/settings.php
 COPY test.php /var/www/html/test.php
 COPY info.php /var/www/html/info.php
 RUN echo 'export USE_ZEND_ALLOC=0' >> /etc/apache2/envvars
+RUN echo 'CoreDumpDirectory /tmp' >> /etc/apache2/apache2.conf
