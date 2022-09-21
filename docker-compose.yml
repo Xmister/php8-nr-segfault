@@ -28,3 +28,9 @@ services:
     restart: on-failure
     depends_on:
       - drupal
+  ab2:
+    image: jordi/ab
+    entrypoint: [ "sh", "-c", "sleep 10; exec ab -n 10000 -c 10 http://drupal/test2.php" ]
+    restart: on-failure
+    depends_on:
+      - drupal
