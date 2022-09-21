@@ -3,7 +3,7 @@ WORKDIR /root
 RUN apt-get update && apt-get -fy install wget git zlib1g-dev libpng-dev mariadb-client gnupg unzip
 RUN echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' > /etc/apt/sources.list.d/newrelic.list
 RUN wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
-ENV NEWRELIC_VERSION=9.7.0.258
+ENV NEWRELIC_VERSION=10.1.0.313
 RUN apt-get update && apt-get -fy install newrelic-php5=$NEWRELIC_VERSION newrelic-php5-common=$NEWRELIC_VERSION newrelic-daemon=$NEWRELIC_VERSION
 RUN ln -s /usr/lib/newrelic-php5/agent/x64/newrelic-20190902.so /usr/local/lib/php/extensions/no-debug-non-zts-20190902/newrelic.so
 RUN docker-php-ext-configure pdo_mysql && \
