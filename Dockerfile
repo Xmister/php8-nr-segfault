@@ -21,5 +21,5 @@ COPY test.php /var/www/html/test.php
 COPY test2.php /var/www/html/test2.php
 COPY test.xml /var/www/html/test.xml
 COPY info.php /var/www/html/info.php
-#RUN echo 'export USE_ZEND_ALLOC=0' >> /etc/apache2/envvars
+RUN echo 'export USE_ZEND_ALLOC=0' >> /etc/apache2/envvars
 RUN echo 'CoreDumpDirectory /tmp' >> /etc/apache2/apache2.conf
