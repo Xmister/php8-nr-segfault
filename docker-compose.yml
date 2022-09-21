@@ -17,8 +17,8 @@ services:
     restart: always
     depends_on:
       - mysql
-    command: [ "bash", "-c", "yes | vendor/bin/drush si --db-url=mysql://drupal:drupal@mysql/drupal ; exec apache2-foreground" ]
     ulimits:
       core: -1
+    command: [ "bash", "-c", "sleep 10; yes | vendor/bin/drush si --db-url=mysql://drupal:drupal@mysql/drupal ; exec apache2-foreground" ]
     volumes:
       - /tmp:/tmp
