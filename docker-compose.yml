@@ -11,9 +11,12 @@ services:
     restart: always
   drupal:
     build: .
+    init: true
     ports:
       - 80:80
     restart: always
     depends_on:
       - mysql
     command: [ "bash", "-c", "yes | vendor/bin/drush si --db-url=mysql://drupal:drupal@mysql/drupal ; exec apache2-foreground" ]
+    volumes:
+      - /tmp:/tmp
